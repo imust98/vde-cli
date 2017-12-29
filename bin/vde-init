@@ -1,0 +1,26 @@
+#!/usr/bin/env node
+
+const download = require('download-git-repo');
+const program = require('commander');
+const exists = require('fs').existsSync;
+const path = require('path');
+const ora = require('ora');
+const chalk = require('chalk');
+const success = chalk.green;
+
+const repository = "imust98/vde";
+
+const rawName = program.args[0]
+const inPlace = !rawName || rawName === '.'
+const name = inPlace ? path.relative('../', process.cwd()) : rawName
+const destination = path.resolve(rawName || '.')
+
+function downloadAndGenerate () {
+  const spinner = ora('downloading project');
+  spinner.start()
+  download(repository, destination, err => {
+    spinner.stop()
+    if (err) logger.fatal('Failed to download repo ' + repository + ': ' + err.message.trim());
+    success('\nSuccess! Created an project at ' + destination + '.\n\nInside that directory, you can run several commands:\n  * npm run start:doc: Starts the doc server.\n  * npm run start:example: Starts the example server.\n\nWe suggest that you begin by typing:\n  npm install\n  npm run start\n\nEnjoy!')
+  })
+}
