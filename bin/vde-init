@@ -10,6 +10,10 @@ const success = chalk.green;
 
 const repository = "imust98/vde";
 
+program
+.usage('<folder-name>')
+.parse(process.argv)
+
 const rawName = program.args[0]
 const inPlace = !rawName || rawName === '.'
 const name = inPlace ? path.relative('../', process.cwd()) : rawName
@@ -24,3 +28,5 @@ function downloadAndGenerate () {
     success('\nSuccess! Created an project at ' + destination + '.\n\nInside that directory, you can run several commands:\n  * npm run start:doc: Starts the doc server.\n  * npm run start:example: Starts the example server.\n\nWe suggest that you begin by typing:\n  npm install\n  npm run start\n\nEnjoy!')
   })
 }
+
+downloadAndGenerate();
