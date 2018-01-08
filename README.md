@@ -1,21 +1,21 @@
 # vde-cli
 
-A simple CLI for scaffolding Component projects.
+一个组件化自动化构建工程的脚手架
 
-### Installation
+### 安装
 
 ``` bash
 $ npm install -g vde-cli
 ```
 
-### Usage
+### 使用
 
 ``` bash
 $ vde init <project-name>
 ```
 
 
-Example:
+举例:
 
 ``` bash
 $ vde init my-project
