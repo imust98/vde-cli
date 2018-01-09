@@ -20,13 +20,15 @@ const name = inPlace ? path.relative('../', process.cwd()) : rawName
 const destination = path.resolve(rawName || '.')
 
 function downloadAndGenerate () {
-  const spinner = ora('downloading project');
+  const spinner = ora('downloading ...');
   spinner.start()
   download(repository, destination, err => {
     spinner.stop()
-    if (err) logger.fatal('Failed to download repo ' + repository + ': ' + err.message.trim());
-    success('\nSuccess! Created an project at ' + destination + '.\n\nInside that directory, you can run several commands:\n  * npm run start:doc: Starts the doc server.\n  * npm run start:example: Starts the example server.\n\nWe suggest that you begin by typing:\n  npm install\n  npm run start\n\nEnjoy!')
-  })
+    if (err) {
+      console.log(chalk.red('Failed to download repo ' + repository + ': ' + err.message.trim()));
+    }
+    console.log(success('\nSuccess! Created an project at ' + destination + '.\n\nInside that directory, you can run several commands:\n  * npm run start:doc: Starts the doc server.\n  * npm run start:example: Starts the example server.\n\nWe suggest that you begin by typing:\n  npm install\n  npm run start\n\nEnjoy!'));
+  });
 }
 
 downloadAndGenerate();
